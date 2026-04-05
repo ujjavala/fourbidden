@@ -16,11 +16,11 @@ const sora = Sora({
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const metadata: Metadata = {
-  title: "JustOneMoreStep",
+  title: "Fourbidden",
   description: "You are almost there. Probably.",
   icons: {
-    icon: `${BASE_PATH}/justonemorestep-logo-design.png`,
-    apple: `${BASE_PATH}/justonemorestep-logo-design.png`
+    icon: `${BASE_PATH}/fourbidden-logo-design.png`,
+    apple: `${BASE_PATH}/fourbidden-logo-design.png`
   }
 };
 
@@ -38,8 +38,8 @@ export default function RootLayout({
           <div className="site-legal-inner">
             <p className="label">GLOBAL TERMS, PRIVACY, ETHICS, AND VIBES</p>
             <p>
-              By continuing to exist near this interface, you acknowledge the JustOneMoreStep
-              Master Service Framework, Addendum Pack 7, and the Continuous Arithmetic Assurance
+              By continuing to exist near this interface, you acknowledge the Fourbidden Master
+              Service Framework, Addendum Pack 7, and the Continuous Arithmetic Assurance
               Charter. Our multi-agent compliance orchestra may collect signals including taps,
               pauses, scroll depth, eyebrow movements (estimated), and confidence posture for the
               exclusive purpose of delivering more steps than requested.

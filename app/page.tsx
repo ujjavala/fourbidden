@@ -630,13 +630,13 @@ export default function HomePage() {
 
           <div className="hero-logo-stage" aria-hidden="true">
             <img
-              src={`${ASSET_BASE_PATH}/justonemorestep-logo-design.png`}
-              alt="JustOneMoreStep logo"
+              src={`${ASSET_BASE_PATH}/fourbidden-logo-design.png`}
+              alt="Fourbidden logo"
               width={320}
               height={320}
               className="hero-main-logo"
             />
-            <p className="hero-logo-caption">JustOneMoreStep</p>
+            <p className="hero-logo-caption">Fourbidden</p>
           </div>
 
           <div className="hero-layout">

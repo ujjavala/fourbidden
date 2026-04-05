@@ -1,6 +1,6 @@
-# JustOneMoreStep
+# Fourbidden
 
-![logo](public/justonemorestep-logo-design.png)
+![logo](public/fourbidden-logo-design.png)
 
 A deliberately frustrating April Fools app that weaponizes Google AI (Gemini) for overengineering.
 It now behaves like a tiny satire product site with multiple pages and a floating top nav.

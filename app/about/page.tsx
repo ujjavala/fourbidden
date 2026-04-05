@@ -5,7 +5,7 @@ export default function AboutPage() {
     <main>
       <div className="main-wrap about-wrap">
         <section className="hero about-hero">
-          <p className="label">ABOUT JUSTONEMORESTEP</p>
+          <p className="label">ABOUT FOURBIDDEN</p>
           <h1 className="brand">A Bold Vision For Making Simple Things Heroic</h1>
           <p className="tagline about-lead">
             We asked one dangerous question: what if "2+2" deserved the same treatment as a global,
@@ -59,7 +59,7 @@ export default function AboutPage() {
           <p className="label">THE MANIFESTO</p>
           <p>
             We are not here to replace human intelligence. We are here to gently delay it while a
-            magnificent AI orchestra warms up. JustOneMoreStep celebrates the modern condition:
+            magnificent AI orchestra warms up. Fourbidden celebrates the modern condition:
             over-automation, over-explanation, and overconfidence, all wrapped in good humor.
           </p>
           <p>
