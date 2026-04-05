@@ -95,48 +95,20 @@ This clears both `.next` and `.next-dev` before starting dev.
 
 Open `http://localhost:3000`.
 
-## Deploy Modes
+## Deployment
 
-### GitHub Pages (Static Demo Mode)
+### GitHub Pages (Static Mode)
 
 Workflow: `.github/workflows/static-blog-deploy.yml`
 
 - Runs with `NEXT_PUBLIC_STATIC_MODE=true`.
 - Builds and deploys a static export to GitHub Pages.
-- This mode is client-only and does not use server `/api/*` routes.
+- Uses client-side fallback generators instead of server `/api/*` routes.
 
-### Cloud Run (Full Server + API Mode)
+To deploy:
 
-Workflow: `.github/workflows/deploy-cloud-run.yml`
-
-- Runs with `NEXT_PUBLIC_STATIC_MODE=false`.
-- Deploys the full Next.js app including `/api/*` routes.
-- Uses `GEMINI_API_KEY` in server runtime.
-
-## Deploy The Real App (Server + API)
-
-GitHub Pages can only host static files. This project uses Next.js server routes (`/api/*`), so to run the full app (same behavior as `npm run dev`), deploy to a server runtime such as **Google Cloud Run**.
-
-This repo includes GitHub Actions workflow:
-
-- `.github/workflows/deploy-cloud-run.yml`
-
-Configure these repository variables (`Settings -> Secrets and variables -> Actions -> Variables`):
-
-- `GCP_PROJECT_ID` (example: `my-gcp-project`)
-- `GCP_REGION` (example: `us-central1`)
-- `CLOUD_RUN_SERVICE` (example: `justonemorestep`)
-
-Configure these repository secrets (`Settings -> Secrets and variables -> Actions -> Secrets`):
-
-- `GCP_SA_KEY` (JSON key for a service account with Cloud Run + Cloud Build permissions)
-- `GEMINI_API_KEY`
-
-After secrets/variables are set, push to `main` to deploy automatically.
-
-The static blog workflow for DEV post content still exists, but it is now manual-only:
-
-- `.github/workflows/static-blog-deploy.yml`
+1. Set GitHub Pages source to `GitHub Actions` in repo settings.
+2. Push to `main`.
 
 ## Suggested DEV Post Angle
 

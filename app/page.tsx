@@ -5,6 +5,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 type Phase = "ask" | "loading" | "explain";
 type AlertToast = { id: number; text: string };
 const STATIC_MODE = process.env.NEXT_PUBLIC_STATIC_MODE === "true";
+const ASSET_BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const DOOMSDAY_ALERTS = [
   "Alert: Off-Syllabus Curiosity Detected",
@@ -344,38 +345,6 @@ export default function HomePage() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!termsOpen || !escalationMode) {
-      return;
-    }
-
-    // Keep escalating forever while the modal is open.
-    void fetchTerms();
-    void fetchStepMessage();
-
-    const termsId = globalThis.setInterval(() => {
-      void fetchTerms();
-    }, 1350);
-
-    const stepId = globalThis.setInterval(() => {
-      void fetchStepMessage();
-    }, 1850);
-
-    const reasonId = globalThis.setInterval(() => {
-      void postJson<{ reason: string }>("/api/loop")
-        .then((data) => setLoopReason(data.reason))
-        .catch(() => {
-          setLoopReason("Escalation remains active. Completion remains denied.");
-        });
-    }, 2400);
-
-    return () => {
-      globalThis.clearInterval(termsId);
-      globalThis.clearInterval(stepId);
-      globalThis.clearInterval(reasonId);
-    };
-  }, [escalationMode, fetchStepMessage, fetchTerms, termsOpen]);
-
   const startFlow = useCallback(
     async (newQuestion: string, previousText?: string) => {
       setError(null);
@@ -469,16 +438,13 @@ export default function HomePage() {
   );
 
   const handleAcceptTerms = useCallback(async () => {
-    if (acceptingTerms) {
-      return;
-    }
-
     setAcceptingTerms(true);
     setError(null);
+    setEscalationMode(true);
+    setStatusNote("Escalation acknowledged. Click again to add more terms and steps.");
 
     try {
-      await fetchTerms();
-      await fetchStepMessage();
+      await Promise.all([fetchTerms(), fetchStepMessage()]);
       const loopData = await postJson<{ reason: string }>("/api/loop");
       setLoopReason(loopData.reason);
     } catch (acceptError) {
@@ -489,10 +455,8 @@ export default function HomePage() {
       );
     }
 
-    setStatusNote("Acceptance recorded. Infinite terms escalation is now active.");
-    setEscalationMode(true);
     setAcceptingTerms(false);
-  }, [acceptingTerms, fetchStepMessage, fetchTerms]);
+  }, [fetchStepMessage, fetchTerms]);
 
   return (
     <main>
@@ -515,7 +479,7 @@ export default function HomePage() {
         <section className="hero">
           <div className="hero-logo-stage" aria-hidden="true">
             <img
-              src="/justonemorestep-logo-design.png"
+              src={`${ASSET_BASE_PATH}/justonemorestep-logo-design.png`}
               alt="JustOneMoreStep logo"
               width={320}
               height={320}
@@ -653,17 +617,16 @@ export default function HomePage() {
               ))}
             </ol>
             <div className="btn-row" style={{ marginTop: "0.9rem" }}>
-              <button className="btn btn-danger" type="button" onClick={handleAcceptTerms} disabled={acceptingTerms}>
+              <button className="btn btn-danger" type="button" onClick={handleAcceptTerms}>
                 {acceptingTerms
                   ? "Accepting And Escalating..."
                   : escalationMode
-                    ? "Escalation Active: Add Even More Terms"
+                    ? "Escalation Active: Click To Add More Terms"
                     : "Accept, Escalate, and Add More Terms"}
               </button>
               <button
                 className="btn btn-secondary"
                 type="button"
-                disabled={acceptingTerms}
                 onClick={() => {
                   setEscalationMode(false);
                   setTermsOpen(false);

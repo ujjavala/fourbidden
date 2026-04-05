@@ -13,12 +13,14 @@ const sora = Sora({
   variable: "--font-sora"
 });
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "JustOneMoreStep",
   description: "You are almost there. Probably.",
   icons: {
-    icon: "/justonemorestep-logo-design.png",
-    apple: "/justonemorestep-logo-design.png"
+    icon: `${BASE_PATH}/justonemorestep-logo-design.png`,
+    apple: `${BASE_PATH}/justonemorestep-logo-design.png`
   }
 };
 
