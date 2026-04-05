@@ -1,8 +1,9 @@
 # JustOneMoreStep
 
-Tagline: **"You're almost there."**
+![logo](public/justonemorestep-logo-design.png)
 
 A deliberately frustrating April Fools app that weaponizes Google AI (Gemini) for overengineering.
+It now behaves like a tiny satire product site with multiple pages and a floating top nav.
 
 ## What It Does
 
@@ -13,8 +14,17 @@ User asks a simple question, and the app responds with:
 - Infinite terms and conditions
 - AI-generated loading messages
 - A fake completion loop that always restarts
+- A dramatic non-2+2 doomsday warning mode
 
 This project is intentionally useless and technically over-built.
+
+## Pages And Navigation
+
+- `/` Home: the main absurd "ask/loading/explain" experience.
+- `/about`: the "AI dependency" satire page.
+- `/services`: upcoming arithmetic services + fake venture rollout.
+
+Top nav includes `Home`, `About`, and `Upcoming Services`, with active-route highlighting.
 
 ## AI-Driven Overengineering
 
@@ -31,6 +41,7 @@ Gemini is used in multiple places:
 
 - Next.js (App Router) + React + TypeScript
 - Google AI (Gemini API) via REST
+- Custom CSS (single global stylesheet)
 
 ## Run Locally
 
@@ -62,9 +73,16 @@ If Gemini quota is exhausted (HTTP 429), the app now automatically retries once 
 npm run dev
 ```
 
-Dev now uses an isolated build directory (`.next-dev`) while production build uses `.next`.
-This prevents recurring stale-chunk errors like `Cannot find module './682.js'` when switching
-between `next dev` and `next build`.
+`npm run dev` clears `.next-dev` and runs with webpack cache disabled.
+Production build still uses `.next` (`npm run build`).
+
+If dev ever gets weird after many rapid changes, use:
+
+```bash
+npm run dev:clean
+```
+
+This clears both `.next` and `.next-dev` before starting dev.
 
 Open `http://localhost:3000`.
 
