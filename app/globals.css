@@ -568,7 +568,7 @@ main::after {
 }
 
 .modal {
-  width: min(760px, 100%);
+  width: min(840px, 100%);
   border-radius: 20px;
   border: 1px solid rgba(123, 160, 236, 0.5);
   background:
@@ -585,7 +585,8 @@ main::after {
 
 .terms-list {
   margin: 0;
-  padding-left: 1.3rem;
+  padding-left: 1.65rem;
+  list-style-position: inside;
   max-height: 46vh;
   overflow: auto;
   display: grid;
